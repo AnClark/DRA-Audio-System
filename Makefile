@@ -18,12 +18,13 @@ audioproc:
 config:
 	python configure/config.py
 
-dev: main.o bitstream.o steps.o errors.o vector.o unitstep.o \
+dev: main.o bitstream.o steps.o bs_iter.o errors.o vector.o unitstep.o \
 	 huffbook.o huffcoding.o hufftree.o mdct.o fastmdct.o
 	gcc -o dra \
-	main.o bitstream.o steps.o errors.o vector.o unitstep.o \
+	errors.o bitstream.o bs_iter.o steps.o vector.o unitstep.o \
 	huffbook.o huffcoding.o hufftree.o mdct.o fastmdct.o \
-	-lfftw3
+	main.o \
+	-lfftw3 -lm
 
 main.o: main.c
 	gcc -c main.c \
